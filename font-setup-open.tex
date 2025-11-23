@@ -11,54 +11,26 @@
 
 % 设置 xeCJK 字体及中文数字
 %\setmainfont{TeX Gyre Pagella}	% 设置西文衬线字体
-\setsansfont{TeX Gyre Heros}	% 设置西文无衬线字体
+\setsansfont{Helvetica Neue}
+	% 设置西文无衬线字体
 
 % 自用模式: Fandol 字体 + 思源黑体 (Noto Sans CJK SC), 宜留意字体高低差异.
-\setCJKmainfont[
-	BoldFont=FandolSong-Bold.otf,
-	ItalicFont=FandolKai-Regular.otf
-]{FandolSong-Regular.otf}
+% ---- 中文字体统一用 macOS 自带的苹方 ----
+\setCJKmainfont{PingFang SC}
+\setCJKsansfont{PingFang SC}
+\setCJKmonofont{PingFang SC}
 
-\setCJKsansfont[
-	BoldFont=FandolHei-Bold.otf
-]{FandolHei-Regular.otf}
+% 各个族名只是“标签”，都绑到 PingFang SC 上
+\setCJKfamilyfont{kai}{PingFang SC}        % \kaishu
+\setCJKfamilyfont{song}{PingFang SC}       % \songti
+\setCJKfamilyfont{fangsong}{PingFang SC}   % \fangsong
+\setCJKfamilyfont{hei}{PingFang SC}        % \heiti
+\setCJKfamilyfont{hei2}{PingFang SC}       % thmheiti / chapter 标题
+\setCJKfamilyfont{sectionfont}{PingFang SC}% section 标题
+\setCJKfamilyfont{pffont}{PingFang SC}     % 证明用字体
+\setCJKfamilyfont{emfont}{PingFang SC}     % \em 强调用的字体
 
-\setCJKmonofont[
-	BoldFont=FandolHei-Bold.otf,
-]{FandolHei-Regular.otf}
 
-
-\setCJKfamilyfont{kai}[
-	BoldFont=FandolKai-Regular.otf, ItalicFont=FandolKai-Regular.otf
-]{FandolKai-Regular.otf}
-
-\setCJKfamilyfont{song}[
-	BoldFont=FandolSong-Bold.otf,
-	ItalicFont=FandolKai-Regular.otf
-]{FandolSong-Regular.otf}
-
-\setCJKfamilyfont{fangsong}[
-	BoldFont=FandolSong-Bold.otf,
-	ItalicFont=FandolKai-Regular.otf
-]{FandolFang-Regular.otf}
-
-\setCJKfamilyfont{hei}[
-	BoldFont=FandolHei-Bold.otf,
-	ItalicFont=FandolHei-Regular.otf
-]{FandolHei-Regular.otf}
-
-\setCJKfamilyfont{hei2}{Noto Sans CJK SC}
-
-\setCJKfamilyfont{sectionfont}[
-	BoldFont=* Black
-]{Noto Sans CJK SC}
-
-\setCJKfamilyfont{pffont}[
-	BoldFont=* Medium
-]{Noto Sans CJK SC}	% 证明用的字体
-\setCJKfamilyfont{emfont}[
-	BoldFont=FandolHei-Regular.otf
-]{FandolHei-Regular.otf}	% 强调用的字体
 
 \defaultfontfeatures{Ligatures=TeX} 
 \XeTeXlinebreaklocale "zh"
