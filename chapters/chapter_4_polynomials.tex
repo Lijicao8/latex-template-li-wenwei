@@ -1,0 +1,57 @@
+\chapter{Properties of polynomials}
+\section{Divided difference}
+对于一个函数 $f$ 和点列
+$X : x_{0}, \ldots, x_{n}$ (不要求按 $\leq$ 排序)，我们定义 $f$ 的 $n$ 阶差商为
+$$[x_{0}, \ldots, x_{n}]f := A_{n}$$
+其中 $A_{n}$ 是插值多项式 $P_{n}(f, X; x)$ 的最高次项 $x^{n}$ 的系数。
+
+\paragraph{n-阶差商满足的性质：}
+\begin{enumerate}
+    \item 若$f$高阶可微，则$[x_0,\dots,x_n]f$是$f^{(k)}(x_i),(0\leq k\leq m_i-1)$的线性组合，其中$m_i$是$x_i$的重数；
+    \item $[x_0,\dots,x_n]f$是一个常数，若$f$是一个多项式，更进一步，若多项式的次数$<n$，则$n-$阶差商是0;
+    \item$[x_0,\dots,x_0]f = f^{(n)}(x_0)/n!$.
+    \item 牛顿型插值公式：\begin{equation*}
+        P_n(f,X;x)= \sum_{k=0}^n(x-x_0)\dots(x-x_{k-1})[x_0,\dots,x_k]f;
+    \end{equation*} 
+    \item 若$f\in C^n[a,b]$，根据Rolle定理\begin{equation*}
+        [x_0,\dots,x_n]f = f^{(n)}(\xi)/n!~~\text{for some } a\leq \xi\leq b;
+    \end{equation*}
+    \item 若$x_i$互异，则
+    \begin{align}\label{eq:差分运算是线性组合}
+        [x_0,\dots,x_n]f &= \sum_{k=0}^n\frac{f(x_k)}{(x_k-x_0)\cdots(x_k-x_{k-1})(x_k-x_{k+1})\cdots (x_k-x_n)}\notag\\
+        & = \sum_{k=0}^n\frac{f(x_k)}{\Omega'(x_k)}
+    \end{align}
+    \item \begin{equation*}
+        \Delta_h^n f(x) = n!h^n[x,x+h,\dots,x+nh]f;
+    \end{equation*}
+    \item \begin{equation*}
+        [x_0,\dots,x_n](gh) = \sum_{k=0}^n\left([x_0,\dots,x_k](g)\right)\left([x_k,\dots,x_n](h)\right)
+    \end{equation*}
+    \item \begin{equation*}
+        [x_0,\dots,x_n]f = \int_0^1\mathrm{d}t_1\int_0^{t_1}\mathrm{d}t_2\cdots\int_0^{t_{n-1}}
+        f^{(n)}\big(x_0+(x_1-x_0)t_1+\cdots+(x_n-x_{n-1})t_n\big)
+        \mathrm{d}t_n
+    \end{equation*}
+\end{enumerate}
+
+
+\paragraph{Peano核}设$\lambda(f):=\int_a^b f \mathrm{d}\mu$ 是$C[a,b]$上的连续线性泛函，并且与所有次数$\leq n-1$的多项式正交，即$\lambda(P_{n-1})=0$，则对任意$f\in C^n[a,b]$，有
+\begin{equation*}
+    \lambda(f) = \int_a^b f^{(n)}(t)\lambda\left[
+        \frac{(\cdot-t)_+^{n-1}}{(n-1)!}
+    \right]\mathrm{d}t
+\end{equation*}
+
+我们把由与多项式正交的泛函诱导出来的表达式
+\begin{equation*}
+    \lambda(f) = \int_a^b f^{(n)}(t)K(t)\mathrm{d}t
+\end{equation*}
+中的$K$称做Peano核.
+
+当$x_0,\dots,x_n$互不相同时，差商运算作为一个泛函是连续的，因此可以诱导Peano核：
+
+\begin{equation}\label{eq:差分算子的Peano核}
+    [x_0,\dots,x_n]f = \int_a^b f^{(n)}(t)[x_0,\dots,x_n]\left[
+        \frac{(\cdot-t)_+^{n-1}}{(n-1)!}\mathrm{d}t
+    \right].
+\end{equation}

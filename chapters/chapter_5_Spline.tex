@@ -1,0 +1,298 @@
+\chapter{Splines}
+\section{Definition and Simple properties}
+\paragraph{样条定义}令$T^*:=(t_i^*)_1^s$或$T^*:=(t_i^*)_{=\infty}^\infty$是$\mathbb{R}$上严格递增的有限序列或双无穷序列，在第二种情况下，假定$|t_i^*|\to\infty,i\to\infty$.若在每个区间$(t_i^*,t_{i+1}^*)$上，函数$S$是一个次数$\leq m=r-1$的多项式，且至少有一个区间上次数恰为$m$，则称$S$是$r$阶且断点为$T^*$的样条.
+
+\paragraph{样条在断点处光滑度}样条在断点$t_i^*$处的光滑度$m_i$定义如下：
+\begin{itemize}
+    \item 若$S$在$t_i^*$处不连续，则令$m_i=0$;
+    \item 否则，$m_i$是满足$0<m_i\leq r$的最大整数，使得$S$在$t_i^*$的某个邻域内属于$C^{(m_i-1)}$，也就是说$S$的各阶导数直到$m_i-1$阶都连续.
+\end{itemize}
+
+
+\paragraph{样条空间}给定区间$A = [a,b]$或$A = \mathbb{R}$，以及断点序列$T^*$，可以在$A$上构造样条空间.记:$S_r^*(A)$
+表示$A$上所有阶数$\leq r$的样条构成的空间；$S_r^*(T^*,A)$表示$A$上所有阶数$\leq r$且断点都包含在$T^*$中都样条构成的空间.
+
+\paragraph{Schoenberg空间}
+给定断点集$T^*$和一系列$m_i(0\leq m_i<r)$，我们定义$A$上的Schoenberg空间：他由所有阶数$\leq r$、断点包含在$T^*$中，并且$t_i^*$处的光滑度至少为$m_i$的样条$S$组成. 不过，通常不是直接使用$m_i$，而是使用所谓的亏格(defect)
+\begin{equation*}
+    k_i:= r-m_i,
+\end{equation*}
+因为$k_i$更好的描述了$S$在$t_i^*$处自由度的个数.这个Schoenberg空间记作
+\begin{equation*}
+    S_r:=S_r(R^*,\boldsymbol{k},A),\quad \boldsymbol{k}:=(k_i).
+\end{equation*}
+
+Schoenberg空间有如下性质
+\begin{enumerate}
+    \item $S_r(T^*,\boldsymbol{1},A)$是任意其他 Schoenberg空间$S_r(T^*,\boldsymbol{k},A)$的子空间;
+    \item 若$S\in S_r(T^*,\boldsymbol{k},A)$，则其任意原函数$S_1\in S_{r+1}(T^*,\boldsymbol{k},A)$，其中亏格$\boldsymbol{k}$相同;
+    \item $S_r(T^*,\boldsymbol{k},A)$总包含所有次数$\leq r-1$的多项式$P_{r-1}$，另一方面，他又是$S_r(T^*,\boldsymbol{r},A)$的子空间（即没有任何光滑性要求，只是分段多项式）.
+\end{enumerate}
+
+\paragraph{样条空间的基}
+在情形 $A=[a,b]$ 下，可以借助截断幂构造 $Y ：= S_r(T^*,\mathbf{k},A)$ 的一个自然基. 通常可以按以下方式找到一组基. 设$dim(Y)= N$，我们在 $Y$ 中找到元素
+$S_1,\ldots,S_N$ 以及线性泛函 $a_1,\ldots,a_N$，满足
+\begin{enumerate}
+    \item \[
+  a_j(S_i)=0,\quad i\neq j;\qquad a_j(S_j)=1,
+\]
+\item 
+\[
+  a_j(S)=0,\quad j=1,\ldots,N\Rightarrow S=0,
+\]
+\end{enumerate}
+在这种情形下有
+\begin{equation}\label{eq:dual-expansion}
+  S = \sum_{j=1}^{N} a_j(S)\,S_j ,
+\end{equation}
+其中 $a_j$ 称为 $S_j$ 的\emph{对偶泛函}. 
+
+
+\begin{theorem}[样条空间的基]\label{thm:样条空间的基}
+若区间 $A=[a,b]$ 有限，则空间 $S_r(T^*,\mathbf{k},I)$ 具有如下基
+\begin{align}
+S_{-j}(x) &:= \frac{(x-a)^j}{j!}, && j = 0,\ldots,r-1, \label{eq:1.3a}\\
+S_{i,j}(x) &:= \frac{(x-t_i^*)_+^{\,j}}{j!}, && j = r-k_i,\ldots,r-1,\quad i = 1,\ldots,s, \label{eq:1.3b}
+\end{align}
+其对应的对偶泛函为
+\begin{align}
+a_{-j}(S) &:= S^{(j)}(a), && j = 0,\ldots,r-1, \label{eq:1.4a}\\
+a_{i,j}(S) &:= S^{(j)}(t_i^{*+}) - S^{(j)}(t_i^{*-}), && j = r-k_i,\ldots,r-1,\quad i = 1,\ldots,s. \label{eq:1.4b}
+\end{align}
+特别地，有
+\begin{equation}
+\dim S_r(T^*,\mathbf{k},A) = n + r,\qquad 
+n := \sum_{i=1}^r k_i. \tag{1.5}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+令 $S\in S_r(T^*,\mathbf{k},I)$. 若对所有 $i=1,\ldots,S$ 以及 
+$j = r-k_i,\ldots,r-1$ 都有 $a_{i,j}(S)=0$，则
+\[
+S,\ldots,S^{(r-1)}
+\]
+在每个 $t_i^*$ 处连续，因此 $S^{(r-1)}$ 为常数. 于是 $S^{(r)}\equiv 0$，
+从而 $S$ 在 $A$ 上必为次数 $< r$ 的多项式. 若再对 $j=0,\ldots,r-1$ 都有
+$a_{-j}(S)=0$，则该多项式所有阶导数在 $a$ 处均为零，只能是零函数，
+即 $S\equiv 0$. 其余部分显然成立. 
+\end{proof}
+
+
+注：$k_i$表示每个节点处的自由度，对于多项式空间来说，基的个数谁$r$，样条空间每个节点$k_i$个自由度，也就是$k_i$个基.
+
+
+
+根据定理\ref{thm:样条空间的基}，$S\in S_r$，可以被写成
+\begin{equation*}
+    S(x) = P_{r-1}(x)+\sum_{i=1}^s\sum_{j=1}^{k_i}c_{i,j}(x-t_i^*)_+^{r-j}
+\end{equation*}
+
+
+
+\paragraph{样条基本不等式}
+样条满足一些与多项式类似的基本不等式. 这里我们只给出 Nikol’skii 与 Markov 不等式在 Schoenberg 空间
+$$
+S_r(T^*,\mathbf{k},A),\qquad A=[a,b],
+$$
+中的变形，其中断点集合为
+$$
+T^* := \{t_j^*\}_{j=1}^s.
+$$
+我们约定
+$$
+t_0^* := a,\qquad t_{s+1}^* := b.
+$$
+
+\begin{theorem}
+若断点 \(T^*\) 满足
+\begin{equation}\label{eq:1.7}
+\delta_0 \le \lvert t_{j+1}^* - t_j^* \rvert \le \delta,\qquad  j = 0,\dots,s,
+\end{equation}
+则对任意
+$$
+S\in S_r(T^*,\mathbf{k},A),\qquad A=[a,b],
+$$
+有
+\begin{equation}\label{eq:1.8}
+\lVert S\rVert_p \le C\,\delta^{1/q-1/p}\,\lVert S\rVert_q,\qquad
+p_0 \le q \le p \le \infty,
+\end{equation}
+其中常数 \(C = C(p_0,r)\)；并且当 \(k=1,\dots,r-1\) 时，还有
+\begin{equation}\label{eq:1.9}
+\lVert S^{(k)}\rVert_p \le C\,\delta_0^{-k}\,\lVert S\rVert_p,\qquad 0<p\le\infty,
+\end{equation}
+这里的常数 \(C = C(r)\). 
+\end{theorem}
+
+\section{B-样条}
+定理\ref{thm:样条空间的基}中，把样条表示成若干截断幂级数之和，从一般观点看其实并不好用，因为截断幂级数的支撑集很大.因此需要引入另一组基，这就是B-样条(Basic splines).
+
+\paragraph{B-样条定义}我们记$[x_0,\dots,x_n]f$表示$f$在这些点的$n$阶差商，我们定义B-样条为
+\begin{equation*}
+    M(x):=M(x;x_0,\dots,x_r):=r[x_0,\dots,x_r](\cdot -x)_+^{r-1}
+\end{equation*}
+其中的点$\{x_0,\dots,x_r\}$称为$M$的结点.
+
+根据式\eqref{eq:差分算子的Peano核}可知，对任意$f\in W_1^r$，
+\begin{equation*}
+    [x_0,\dots,x_r]f = \frac{1}{r!}\int_\infty^\infty f^{(r)}(t)M(t)\mathrm{d}t.
+\end{equation*}
+令$f(t) = t^r$，可得
+\begin{equation*}
+    \int_{-\infty}^\infty M(t)\mathrm{d}t = 1.
+\end{equation*}
+
+当$r = 1$时，
+\begin{equation*}
+    M(x;x_0,x_1) = \frac{1}{x_1-x_0}\mathcal{X}_{(x_0,x_1)}(x),\quad x\neq x_0,x_1.
+\end{equation*}
+
+
+\paragraph{B-样条性质}
+\begin{enumerate}
+    \item $M(x)>0,\quad x\in(x_0,x_r);\quad M(x) = 0,\quad x\not\in [x_0,x_r]$
+    \item $\begin{cases}
+        M(x)\sim (x-x_0)^{r-k_0},~~x\to x_0^+;\\
+        M(x)\sim (x-x_r)^{r-k_r},~~x\to x_r^-.
+    \end{cases}\qquad\text{(其中$k_0,k_r$是$x_0,x_r$的重数.)}$
+    \item $M(x)\leq C_r/(x_r-x_0),\quad x\in\mathbb{R},$
+    \item 递推公式：\begin{equation*}
+        M(x;x_0,\dots,x_r) = \frac{r}{r-1}\left[
+            \frac{x-x_0}{x_r-x_0}M(x;x_0,\dots,x_{r-1})+\frac{x_r-x}{x_r-x_0}M(x;x_1,\dots,x_r)
+        \right]
+    \end{equation*}
+\end{enumerate}
+注：递推公式 4 可以由对$(\cdot - x)_+^{r-1}=(\cdot-x)(\cdot - x)_+^{r-2}$两侧使用差分的莱布尼茨公式得到.
+
+我们得到一个$M$的变体，使得其具有更简单的递推公式，并且，其导数也是容易计算的:
+\begin{equation}\label{eq:样条-N定义}
+    N(x;x_0,\dots,x_r):=\frac{1}{r} (x_r-x_0) M(x;x_0,\dots,x_r) = (x_r-x_0)[x_0,\dots,x_r](\cdot-x)_+^{r-1}.
+\end{equation}
+则有
+\begin{align*}
+    N(x;x_0,\dots,x_r) &= \frac{x-x_0}{x_{r-1}-x_0}N(x;x_0,\dots,x_{r-1})+\frac{x_r-x}{x_{r}-x_1}N(x;x_1,\dots,x_{r}),\\[2pt]
+    N'(x;x_0,\dots,x_r) & = -(r-1)\Big([x_1,\dots,x_r]-[x_0,\dots,x_{r-1}]\Big)(\cdot -x)_+^{r-2}\\[2pt]
+     &= (r-1)\left(\frac{N(x;x_0,\dots,x_{r-1})}{x_{r-1}-x_0} - \frac{N(x;x_1,\dots,x_{r})}{x_{r}-x_1}\right)
+\end{align*}
+根据\eqref{eq:差分运算是线性组合}，差分运算实际上是关于$f(x_k)$的线性组合.因此差分运算与求导运算可以交换顺序!除此之外$(t-x)_+^{r-1}$对于$x= t$点是$r-2$阶连续可微的.
+
+
+\paragraph{整数节点B-样条}
+特别重要的一种$B-$样条是整数节点的B-样条. 此时$M_1(x) = \mathcal{X}_I(x)$，其中$I = [0,1]$，并且$N_r = M_r: = M(x;0,\dots,r)$可以通过卷积得到：
+\begin{equation*}
+    M_r = M_{r-1}*\mathcal{X}_I =\mathcal{X}_I*\cdots *\mathcal{X}_I,
+\end{equation*}
+并且
+\begin{equation*}
+    M_r'(x) = N_r'(x) = N_r(x)-N_r(x-1).
+\end{equation*}
+
+
+
+
+
+\paragraph{样条函数随节点的变化}
+\begin{lemma}
+假设向量
+\(
+(y_0,\ldots,y_r)
+\)
+在 \(\mathbb{R}^{r+1}\) 中收敛到
+\(
+(x_0,\ldots,x_r)
+\)，并且 \(A\subset\mathbb{R}\) 是紧集．则有：
+
+\begin{enumerate}
+  \item[(i)] 若 \(x_0,\ldots,x_r\) 都是实数点，且其中属于集合 \(A\) 的点中，任意时刻至多有 \(r-1\) 个两两重合，则
+  \[
+    M(x; y_0,\ldots,y_r)\xrightarrow[y\to x]{} M(x; x_0,\ldots,x_r)
+  \]
+  在 \(x\in A\) 上一致收敛．函数 \(N(x; y_0,\ldots,y_r)\) 也有同样的结论．
+
+  \item[(ii)] 若 \(0<q<\infty\)，则
+  \[
+    N(x: y_0,\ldots,y_r)\xrightarrow[y\to x]{} N(x: x_0,\ldots,x_r)
+  \]
+  在空间 \(L_q(A)\) 的度量下收敛．
+\end{enumerate}
+\end{lemma}
+
+
+
+
+
+\section{B-Spline Series}
+Schoenberg空间$S_r(T^*,\boldsymbol{k},A)$在定理\ref{thm:样条空间的基}给出的基中相当简单，也能给出系数的简单公式. 然而，这种基有一些明显的缺点：计算样条$S$的系数时，需要知道$S$在所有断点$t_i^*$处的值. 对于大多数逼近或插值问题来说，一个局部的基更实用-B-样条基. 他只需要利用$S$在靠近$x$的$r+1$个点上的数据，就可以计算$S(x)$.
+
+我们调整记号$S_r(T^*,\boldsymbol{k},A)$，其中$\boldsymbol{k}$表示断点$t_i^*$的重数，得到一个单调不减的序列
+\begin{equation*}
+    T = (t_i),
+\end{equation*}
+我们称$T$为Schoenberg空间的基本结点序列.，并把该空间记为
+\begin{equation*}
+    S_r:=S_r(T,A).
+\end{equation*}
+当$A = \mathbb{R}$时，若$|i|\to\infty$，则$|t_i|\to\infty$. 在所有情况下（因为$k_i\leq r$），都有
+\begin{equation*}
+    t_i<t_{i+r},\quad \forall i.
+\end{equation*}
+若$A = [a,b]$，我们还需要辅助结点
+\begin{equation*}
+    t_{-r+1\leq\cdots \leq t_0\leq a},\quad t_{n+r}\geq \cdots\geq t_{n+1}\geq b.
+\end{equation*}
+满足$k_i = 1$的结点为简单节点.
+
+按第一节的定义，空间$S_r(T,A)$由所有阶数$\leq r$的样条$S$组成，这些样条在每个重数为$k_i$的基本结点处，都
+具有阶数$<r-k_i$ 的连续导数. 
+基本结点完全决定了空间$S_r(T,A)$;辅助结点只是在构造 B-样条基时需要. 
+
+
+\paragraph{$S_r$的基}
+\begin{theorem}
+    $N_j(x):=N_{j,r}(x):=N(x;t_{j},\dots,t_{j+r}),~(j\in \Lambda)$是$S_r(T,A)$的一组基，其中
+    \begin{equation*}
+        \Lambda:=
+        \begin{cases}
+            \{-r+1,\dots,n\},&A = [a,b];\\
+            \mathbb{Z},&A = \mathbb{R}.
+        \end{cases}
+    \end{equation*}
+    $N_j(x)$定义见\eqref{eq:样条-N定义}.
+
+    此外，对任意$S\in S_r(T,A)$，可以被唯一写成
+    \begin{equation*}
+        S(x) = \sum_{j\in\Lambda}c_j(S)N_j(x),
+    \end{equation*}
+    其中，% 定义 g_{j,r}
+\[
+g_{j,r}(x)
+=
+\begin{cases}
+1, & r = 1,\\[4pt]
+\dfrac{1}{(r-1)!}\displaystyle\prod_{\ell=1}^{r-1}\bigl(x - t_{j+\ell}\bigr), & r \ge 2,
+\end{cases}
+\]
+并约定 \(g_j := g_{j,r}\).
+
+% 定义 B 样条系数 c_j(S)
+\[
+c_j(S)
+:= \sum_{\nu=0}^{r-1} (-1)^{\nu}\,
+g_j^{(r-\nu-1)}(\xi_j)\, S^{(\nu)}(\xi_j),
+\qquad S\in S_r(T,A),
+\]
+其中 \(\xi_j \in (t_j,t_{j+r})\cap A\).
+
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+\section{Good Approximation for $L^p$ by splines}
